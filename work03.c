@@ -2,38 +2,39 @@
 #include <stdlib.h>
 #include <time.h>
 
+void print_array(int *a, int length) {
+    int i;
+    for (i = 0; i < length; i ++) {
+        printf("[%d]: %d\n", i, a[i]);
+    }
+}
+
 int main() {
     int arrA[10];
-    int i = 0;
+    int arrB[10];
+    int i;
     srand(time(NULL));
     
-    for (; i < 10; i ++) {
+    for (i = 0; i < 10; i ++) {
         arrA[i] = rand();
         //printf("%d\n", arrA[i]);
     }
     
     arrA[9] = 0;
-    i = 0;
     
     printf("The original array:\n");
-    for (; i < 10; i ++) {
-        printf("arr[%d]: %d\n", i, arrA[i]);
-    }
+    print_array(arrA, 10);
+    printf("--------------------\n");
     
-    int arrB[10];
-    int *ip;
-    i = 0;
+    int *p = arrA + 9;
     
-    for (; i < 10; i ++) {
-        ip = &arrA[9 - i];
-        arrB[i] = *ip;
+    for (i = 0; i < 10; i ++) {
+        arrB[i] = *p;
+        p --;
     }
     
     printf("The second array:\n");
-    i = 0;
-    for (; i < 10; i ++) {
-        printf("arr[%d]: %d\n", i, arrB[i]);
-    }
+    print_array(arrB, 10);
         
     return 0;
 }
